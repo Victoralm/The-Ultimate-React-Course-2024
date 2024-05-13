@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React</title>
+
+</head>
+
+<body>
+    <div id="root"></div> <!-- Standard React root point -->
+
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script> <!-- Core React component -->
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> <!-- DOM React Component -->
+
+    <!-- React Custom components start -->
+    <script>
+        function App() {
+            // const time = new Date().toLocaleTimeString();
+
+            /// Updating every second
+            const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+            React.useEffect(() => {
+                setInterval(() => {
+                    setTime(new Date().toLocaleTimeString())
+                }, 1000);
+            }, [])
+
+
+            return React.createElement("header", null, `Hello React... It's ${time}`); // Calling a function from the Core component
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root')); // Calling a function from the DOM component
+        root.render(React.createElement(App)); // Calling the App to be rendered
+    </script>
+    <!-- React Custom components end -->
+
+</body>
+
+</html>
