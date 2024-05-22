@@ -143,6 +143,7 @@ function getBook(id) {
   return data.find((d) => d.id === id);
 }
 
+/*
 ///NOTE: Destructuring
 const books = getBooks();
 
@@ -252,3 +253,124 @@ console.log('' ?? 'Some string');
 console.log(0 ?? 'Some string');
 console.log(null ?? 'Some string');
 console.log(undefined ?? 'Some string');
+
+///NOTE: Optional Chaining
+//
+const book3 = getBook(3);
+// function getTotalReviewCount(book) {
+//   const goodreads = book.reviews.goodreads.reviewsCount;
+//   const librarything = book.reviews.librarything.reviewsCount;
+//   return goodreads + librarything;
+// }
+// console.log(getTotalReviewCount(book1));
+// console.log(getTotalReviewCount(book3)); // Inducing an error, since book3
+// doesn't have a defined librarything
+// In order to solve this, we'll use Optional Chaining
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount;
+  return goodreads + librarything;
+}
+console.log(getTotalReviewCount(book3));
+// Taking advantage of the NULLISH operator
+function getTotalReviewCount2(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  return goodreads + librarything;
+}
+console.log(getTotalReviewCount2(book3));
+*/
+
+/*
+///NOTE: Array Methods (Map, Filter, Reduce, Sort)
+// Creates a copy of the array without modifying the original one
+// Map: iterates on each elements of the array while apply a function to them
+console.log([1, 2, 3, 4, 5].map(el => el * 2));
+
+function getTotalReviewCount2(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  return goodreads + librarything;
+}
+
+const titles = getBooks().map(el => el.title);
+console.log(titles);
+// const essentialData = getBooks().map(book => {
+//   return {
+//     title: book.title,
+//     author: book.author,
+//   };
+// });
+// Even less code
+const essentialData = getBooks().map(book => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount2(book),
+}));
+console.log(essentialData);
+
+// Filter: return elements that match a condition
+const longBooks = getBooks()
+  .filter(book => book.pages >= 500)
+  .filter(book => book.hasMovieAdaptation);
+console.log(longBooks);
+const adventureBooks = getBooks()
+  .filter(book => book.genres.includes('adventure'))
+  .map(book => book.title);
+console.log(adventureBooks);
+
+// Reduce: Intends to extract a single combined information from an array
+const pagesAllBooks = getBooks().reduce((sum, book) => sum + book.pages, 0);
+console.log(pagesAllBooks);
+
+// Sort: Used to sort the elements of an array
+// It changes the original array
+const arr = [3, 7, 1, 5, 9];
+const sortedAsc = arr.sort((a, b) => a - b);
+console.log(sortedAsc);
+console.log(arr);
+const sortedDes = arr.sort((a, b) => b - a);
+console.log(sortedDes);
+console.log(arr);
+// Creating a new array using slice()
+const sortedAsc2 = arr.slice().sort((a, b) => a - b);
+console.log(sortedAsc2);
+console.log(arr);
+const sortedByPages = getBooks().slice().sort((a, b) => a.pages - b.pages);
+console.log(sortedByPages);
+
+///NOTE: Working with immutable arrays
+// 1- Add a book object to the array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling"
+};
+const booksAfterAdd = [...getBooks(), newBook]; // Not changing the original array
+console.log(booksAfterAdd);
+// 2- Delete a book object from the array
+const booksAfterDelete = booksAfterAdd.filter(x => x.id != 6); // Not changing the original array
+console.log(booksAfterDelete);
+console.log(booksAfterAdd);
+// 3- Update a book object in the array
+const booksAfterUpdate = booksAfterAdd.map(x => x.id == 6 ? {...x, pages: 111} : x); // Not changing the original array
+console.log(booksAfterUpdate);
+console.log(booksAfterAdd);
+*/
+
+///NOTE: Asynchronous JS: Promises
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then(res => res.json())
+//   .then(data => console.log(data));
+// console.log("Victor"); // Confirming that the JS continue running and isn't blocked by the fetch()
+
+///NOTE: Asynchronous JS: Async and Await
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  // console.log(data)
+  return data;
+}
+const todos = await getTodos();
+console.log(todos);
+console.log("Victor");
