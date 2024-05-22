@@ -28,6 +28,14 @@ function Menu() {
 }
 
 function Footer() {
+    const hour = new Date().getHours();
+    const openHour = 12;
+    const closeHour = 22;
+    // if (hour >= openHour && hour <= closeHour) alert("We're currently open!")
+    // else alert("We're currently closed!");
+    const isOpen = hour >= openHour && hour <= closeHour;
+    console.log(isOpen);
+
     return <footer>{new Date().toLocaleTimeString()} - We're currently open!</footer>;
 }
 
@@ -45,7 +53,7 @@ function Pizza() {
 
 // React 18
 const root = ReactDOM.createRoot(document.getElementById("root"));
-// StrictMode Search for commun bugs and outdated modules of the React framework
+// StrictMode Search for commun bugs (it forces the app component to run twice) and outdated modules of the React framework
 root.render(
     <React.StrictMode>
         <App />
