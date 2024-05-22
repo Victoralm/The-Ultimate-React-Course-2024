@@ -5,12 +5,30 @@ import { pizzaData } from "./data";
 function App() {
     return (
         <div>
-            <h1>Hello React...</h1>
+            <Header/>
+            <Menu/>
+            <Footer/>
+        </div>
+    );
+}
+
+function Header() {
+    return <h1>Fast React Pizza Co.</h1>;
+}
+
+function Menu() {
+    return (
+        <div>
+            <h2>Our menu</h2>
             <Pizza /> {/*Nesting the Pizza component into the App component*/}
             <Pizza />
             <Pizza />
         </div>
     );
+}
+
+function Footer() {
+    return <footer>{new Date().toLocaleTimeString()} - We're currently open!</footer>;
 }
 
 // The new Pizza component
