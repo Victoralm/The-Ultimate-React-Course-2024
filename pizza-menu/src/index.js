@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { pizzaData } from "./data";
+import "./index.css";
 
 function App() {
     return (
-        <div>
+        <div className="container">
             <Header/>
             <Menu/>
             <Footer/>
@@ -13,17 +14,24 @@ function App() {
 }
 
 function Header() {
-    return <h1>Fast React Pizza Co.</h1>;
+    // return <h1 style={{color: 'red', fontSize: '32px', textTransform: 'uppercase'}}>Fast React Pizza Co.</h1>;
+    // const style = { color: 'red', fontSize: '32px', textTransform: 'uppercase' };
+    // return <h1 style={style} className="header">Fast React Pizza Co.</h1>;
+    return (
+        <header className="header">
+            <h1>Fast React Pizza Co.</h1>
+        </header>
+    );
 }
 
 function Menu() {
     return (
-        <div>
+        <main className="menu">
             <h2>Our menu</h2>
             <Pizza /> {/*Nesting the Pizza component into the App component*/}
             <Pizza />
             <Pizza />
-        </div>
+        </main>
     );
 }
 
@@ -36,7 +44,7 @@ function Footer() {
     const isOpen = hour >= openHour && hour <= closeHour;
     console.log(isOpen);
 
-    return <footer>{new Date().toLocaleTimeString()} - We're currently open!</footer>;
+    return <footer className="footer">{new Date().toLocaleTimeString()} - We're currently open!</footer>;
 }
 
 // The new Pizza component
@@ -45,7 +53,7 @@ function Pizza() {
     return (
         <div>
             <img src={pizzaData[0].photoName} alt={pizzaData[0].name}/>
-            <h2>{pizzaData[0].name}</h2>
+            <h3>{pizzaData[0].name}</h3>
             <p>{pizzaData[0].ingredients}</p>
         </div>
     );
