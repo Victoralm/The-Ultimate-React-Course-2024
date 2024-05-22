@@ -28,20 +28,15 @@ function Menu() {
     return (
         <main className="menu">
             <h2>Our menu</h2>
-            <ul className="pizzas">
-                {/* {pizzaData.map(pizza =>
-                    <Pizza name={pizza.name}
-                        ingredients={pizza.ingredients}
-                        photo={pizza.photoName}
-                        price={pizza.price}
-                    />
-                )} */}
-                {pizzaData.map(pizza =>
-                    <Pizza pizzaObj={pizza}
-                        key={pizzaData.name} // React needs an individual key for each item on a list
-                    />
-                )}
-            </ul>
+            {pizzaData.length > 0 && (
+                <ul className="pizzas">
+                    {pizzaData.map(pizza =>
+                        <Pizza pizzaObj={pizza}
+                            key={pizzaData.name} // React needs an individual key for each item on a list
+                        />
+                    )}
+                </ul>
+            )} {/* Shortcircuiting example */}
         </main>
     );
 }
@@ -73,7 +68,16 @@ function Footer() {
     const isOpen = hour >= openHour && hour <= closeHour;
     console.log(isOpen);
 
-    return <footer className="footer">{new Date().toLocaleTimeString()} - We're currently open!</footer>;
+    return (
+        <footer className="footer">
+            {isOpen && (
+                <div className="order">
+                    <p>We're open until {closeHour}:00. Come visit us or order online!</p>
+                    <button className="btn">Order</button>
+                </div>
+            )} {/* Shortcircuiting example */}
+        </footer>
+    );
 }
 
 
