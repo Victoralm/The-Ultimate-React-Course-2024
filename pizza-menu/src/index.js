@@ -47,6 +47,9 @@ function Menu() {
 /// componet to its child component. Never the other way around... (Like in Angular)
 function Pizza(props) {
     console.log(props);
+
+    if (props.pizzaObj.soldOut) return null;
+
     return (
         <li className="pizza">
             <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
@@ -67,6 +70,13 @@ function Footer() {
     // else alert("We're currently closed!");
     const isOpen = hour >= openHour && hour <= closeHour;
     console.log(isOpen);
+
+    // if (!isOpen)
+    //     return (
+    //         <p>
+    //             We're happy to welcome you between {openHour}:00 and {closeHour}:00
+    //         </p>
+    //     );
 
     return (
         <footer className="footer">
