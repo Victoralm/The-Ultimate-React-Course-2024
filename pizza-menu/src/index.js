@@ -28,10 +28,46 @@ function Menu() {
     return (
         <main className="menu">
             <h2>Our menu</h2>
-            <Pizza /> {/*Nesting the Pizza component into the App component*/}
-            <Pizza />
-            <Pizza />
+            <Pizza
+                name={pizzaData[0].name}
+                ingredients={pizzaData[0].ingredients}
+                photo={pizzaData[0].photoName}
+                price={pizzaData[0].price}
+            /> {/*Nesting the Pizza component into the App component*/}
+            <Pizza
+                name={pizzaData[1].name}
+                ingredients={pizzaData[1].ingredients}
+                photo={pizzaData[1].photoName}
+                price={pizzaData[1].price}
+            />
+            <Pizza
+                name={pizzaData[2].name}
+                ingredients={pizzaData[2].ingredients}
+                photo={pizzaData[2].photoName}
+                price={pizzaData[2].price}
+            />
+            <Pizza
+                name={pizzaData[3].name}
+                ingredients={pizzaData[3].ingredients}
+                photo={pizzaData[3].photoName}
+                price={pizzaData[3].price}
+            />
         </main>
+    );
+}
+
+// The new Pizza component
+function Pizza(props) {
+    console.log(props);
+    return (
+        <div className="pizza">
+            <img src={props.photo} alt={props.name} />
+            <div>
+                <h3>{props.name}</h3>
+                <p>{props.ingredients}</p>
+                <span>{props.price + 3}</span>
+            </div>
+        </div>
     );
 }
 
@@ -47,17 +83,6 @@ function Footer() {
     return <footer className="footer">{new Date().toLocaleTimeString()} - We're currently open!</footer>;
 }
 
-// The new Pizza component
-function Pizza() {
-    // return <h2>Pizza</h2>;
-    return (
-        <div>
-            <img src={pizzaData[0].photoName} alt={pizzaData[0].name}/>
-            <h3>{pizzaData[0].name}</h3>
-            <p>{pizzaData[0].ingredients}</p>
-        </div>
-    );
-}
 
 // React 18
 const root = ReactDOM.createRoot(document.getElementById("root"));
