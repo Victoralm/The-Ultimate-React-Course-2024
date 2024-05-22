@@ -28,46 +28,39 @@ function Menu() {
     return (
         <main className="menu">
             <h2>Our menu</h2>
-            <Pizza
-                name={pizzaData[0].name}
-                ingredients={pizzaData[0].ingredients}
-                photo={pizzaData[0].photoName}
-                price={pizzaData[0].price}
-            /> {/*Nesting the Pizza component into the App component*/}
-            <Pizza
-                name={pizzaData[1].name}
-                ingredients={pizzaData[1].ingredients}
-                photo={pizzaData[1].photoName}
-                price={pizzaData[1].price}
-            />
-            <Pizza
-                name={pizzaData[2].name}
-                ingredients={pizzaData[2].ingredients}
-                photo={pizzaData[2].photoName}
-                price={pizzaData[2].price}
-            />
-            <Pizza
-                name={pizzaData[3].name}
-                ingredients={pizzaData[3].ingredients}
-                photo={pizzaData[3].photoName}
-                price={pizzaData[3].price}
-            />
+            <ul className="pizzas">
+                {/* {pizzaData.map(pizza =>
+                    <Pizza name={pizza.name}
+                        ingredients={pizza.ingredients}
+                        photo={pizza.photoName}
+                        price={pizza.price}
+                    />
+                )} */}
+                {pizzaData.map(pizza =>
+                    <Pizza pizzaObj={pizza}
+                        key={pizzaData.name} // React needs an individual key for each item on a list
+                    />
+                )}
+            </ul>
         </main>
     );
 }
 
 // The new Pizza component
+///NOTE: Props are supposed to be immutable. If we need to change data, then use States.
+/// React uses the ONE-WAY data flow: the data are only passed from the parrent
+/// componet to its child component. Never the other way around... (Like in Angular)
 function Pizza(props) {
     console.log(props);
     return (
-        <div className="pizza">
-            <img src={props.photo} alt={props.name} />
+        <li className="pizza">
+            <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
             <div>
-                <h3>{props.name}</h3>
-                <p>{props.ingredients}</p>
-                <span>{props.price + 3}</span>
+                <h3>{props.pizzaObj.name}</h3>
+                <p>{props.pizzaObj.ingredients}</p>
+                <span>{props.pizzaObj.price + 3}</span>
             </div>
-        </div>
+        </li>
     );
 }
 
