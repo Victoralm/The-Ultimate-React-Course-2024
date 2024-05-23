@@ -51,15 +51,16 @@ function Menu() {
 function Pizza({pizzaObj}) {// Destucturing example
     console.log(pizzaObj);
 
-    if (pizzaObj.soldOut) return null;
+    // if (pizzaObj.soldOut) return null;
 
     return (
-        <li className="pizza">
+        // <li className={!pizzaObj.soldOut ? "pizza" : "pizza sold-out"}>{/* With simple ternary */}
+        <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>{/* With text interpolation */}
             <img src={pizzaObj.photoName} alt={pizzaObj.name} />
             <div>
                 <h3>{pizzaObj.name}</h3>
                 <p>{pizzaObj.ingredients}</p>
-                <span>{pizzaObj.price + 3}</span>
+                <span>{!pizzaObj.soldOut ? pizzaObj.price + 3 : "SOLD OUT"}</span>
             </div>
         </li>
     );
