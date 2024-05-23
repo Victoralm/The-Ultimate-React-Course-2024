@@ -29,13 +29,16 @@ function Menu() {
         <main className="menu">
             <h2>Our menu</h2>
             {pizzaData.length > 0 ? (
-                <ul className="pizzas">
-                    {pizzaData.map(pizza =>
-                        <Pizza pizzaObj={pizza}
-                            key={pizzaData.name} // React needs an individual key for each item on a list
-                        />
-                    )}
-                </ul>
+                <React.Fragment key='something'> {/*Example of React fragment (Instead of "<React.Fragment>" could be only "<>"), may need a key property. Allows more then one element inside a piece of JSX*/}
+                    <p>Authentic Italian cuisine. 6 creative dishes to chose from. All from our stove oven, all organic, all delicious.</p>
+                    <ul className="pizzas">
+                        {pizzaData.map(pizza =>
+                            <Pizza pizzaObj={pizza}
+                                key={pizzaData.name} // React needs an individual key for each item on a list
+                            />
+                        )}
+                    </ul>
+                </React.Fragment>
             ) : <p>We're still working on our menu. Please come back later :)</p>} {/* Ternary example */}
         </main>
     );
